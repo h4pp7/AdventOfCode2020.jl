@@ -1,6 +1,16 @@
+module AdventOfCode2020
+
+using StrLiterals
 using StrFormat
 
-function init()
+export readinput
+function readinput(path::AbstractString)
+    open(path, "r") do f
+        read(f, String)
+    end
+end
+
+function setup_project()
     for i = 1:26
         dir_name = f"day\%02d(i)"
         input_name = f"day\%02d(i)/day\%02d(i)_input.txt"
@@ -17,7 +27,7 @@ function init()
             open(solution_name, "w") do io
                 write(io, f"""module Day\%02d(i)
 
-include("../main.jl")
+using AdventOfCode
 
 function part1()
 	data
@@ -33,3 +43,5 @@ end # module""")
         end
     end
 end
+
+end # module
