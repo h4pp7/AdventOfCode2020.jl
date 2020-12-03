@@ -1,3 +1,8 @@
+name = "AdventOfCode2020"
+uuid = "a207fa49-8494-4aac-a5af-793a9e845524"
+authors = ["Yann Wilhelm <yannwilhelm@yahoo.de>"]
+version = "0.1.0"
+
 [deps]
 StrFormat = "b5087856-efa9-5a6d-8e6f-97303a7af894"
 StrLiterals = "68059f60-971f-57ff-a2d0-18e7de9ccc84"
