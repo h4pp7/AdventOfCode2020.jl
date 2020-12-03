@@ -3,11 +3,14 @@ module AdventOfCode2020
 using StrLiterals
 using StrFormat
 
-for i in 1:2
-    include(joinpath(@__DIR__, f"Day\%02d(i)", f"Day\%02d(i).jl"))
+for i in 1:26
+    include(joinpath(@__DIR__, f"Day\%02d(i).jl"))
 end
 
-export readinput, Day01, Day02, Day03
+export  Day01, Day02, Day03, Day04, Day05, Day06, Day07, Day08, Day09, 
+        Day10, Day11, Day12, Day13, Day14, Day15, Day16, Day17, Day18, 
+        Day19, Day20, Day21, Day22, Day23, Day24, Day25, Day26, 
+        readinput, splitlines
 
 function readinput(path::AbstractString)
     open(path, "r") do f
@@ -15,15 +18,15 @@ function readinput(path::AbstractString)
     end
 end
 
+function splitlines(input::AbstractString)
+    split(input, "\n", keepempty=false)
+end
+
 function setup_project()
     for i = 1:26
-        dir_name = joinpath(@__DIR__, f"Day\%02d(i)")
-        input_name = joinpath(@__DIR__, f"Day\%02d(i)/Day\%02d(i)_input.txt")
-        solution_name = joinpath(@__DIR__, f"Day\%02d(i)/Day\%02d(i).jl")
+        input_name = joinpath(@__DIR__, f"Day\%02d(i)_input.txt")
+        solution_name = joinpath(@__DIR__, f"Day\%02d(i).jl")
 
-        if ispath(dir_name) == false
-            mkdir(dir_name)
-        end
         if ispath(input_name) == false
             touch(input_name)
         end
@@ -33,8 +36,8 @@ function setup_project()
                 write(io, f"""module Day\%02d(i)
 using AdventOfCode2020
 
-function solve(i)(input::AbstractString = readinput(
-    joinpath(@__DIR__, "day\%02d(i)_input.txt")))
+function solve(input::AbstractString = readinput(
+    joinpath(@__DIR__, "Day\%02d(i)_input.txt")))
     data = split(input, "\n", keepempty=false)
     (Part1=part1(data), Part2=part2(data))
 end
