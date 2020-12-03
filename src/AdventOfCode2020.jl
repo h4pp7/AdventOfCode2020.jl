@@ -3,7 +3,7 @@ module AdventOfCode2020
 using StrLiterals
 using StrFormat
 
-const solved_days = 1
+const solved_days = 2
 
 for i in 1:solved_days
     include(joinpath(@__DIR__, f"day\%02d(i)", f"day\%02d(i).jl"))
