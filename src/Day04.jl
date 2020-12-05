@@ -1,38 +1,31 @@
 module Day04
 using AdventOfCode2020
 
-# Passports are separated by blank lines. But fields are not in the same order
 const passports = readinput(joinpath(@__DIR__, "Day04_input.txt")) |>
-                  x -> split(x, "\n\n") |> pairs
-
-#=
-data = eachmatch(r"(?:\n|^)((?:\n|.)+?)(?=\n\n|$)",
-                 readinput(joinpath(@__DIR__, "Day04_input.txt"))) |> collect
-
-passports = Dict(i => p for (i, p) in enumerate(data))
-=#
-
-# Wenn ich die so gruppiere teste ich ja nur, ob sie eines von den feldern
-# haben. Nur nach den substrings will ich nicht suchen, weil was wenn die in den
-# values mal vorkommen
+                  x -> split(x, "\n\n")
 
 const requiered_fields = [r"(^|\s)byr:\S", r"(^|\s)eyr:\S", r"(^|\s)iyr:\S",
                           r"(^|\s)ecl:\S", r"(^|\s)hcl:\S", r"(^|\s)hgt:\S",
                           r"(^|\s)pid:\S"]
 
+const valid_fields = [r"byr:(19[2-9][0-9]|200[0-2])(\s|$)",
+                      r"iyr:20(1[0-9]|20)(\s|$)", r"eyr:20(2[0-9]|30)(\s|$)",
+                      r"hgt:(1([5-8][0-9]|9[0-3])cm|(59|6[0-9]|7[0-6])in)(\s|$)",
+                      r"hcl:#([0-9]|[a-f]){6}(\s|$)",
+                      r"ecl:(amb|blu|brn|gry|grn|hzl|oth)(\s|$)",
+                      r"pid:[0-9]{9}(\s|$)"]
+
 function solve(passports = passports, required_fields = requiered_fields)
-    (Part1=part1(passports, requiered_fields), Part2=part2(data))
-end
-
-function part1(passports = passports, required_fields = requiered_fields)
-	checks = [
-		occursin(r, p) for p in passports, r in requiered_fields
-	]
-
-	sum(mapslices(all, checks, dims = [2]))
-end
-
-function part2(data)
-    missing
+    solution1 = 0
+    solution2 = 0
+    for p in passports  
+        if all((occursin(r, p) for r in requiered_fields)) == 1
+            solution1 += 1
+            if all((occursin(v, p) for v in valid_fields)) == 1
+                solution2 +=1
+            end
+        end
+    end
+    (Part1=solution1, Part2=solution2)
 end
 end # module
