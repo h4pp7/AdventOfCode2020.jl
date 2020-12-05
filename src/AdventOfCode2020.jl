@@ -2,6 +2,9 @@ module AdventOfCode2020
 
 using StrLiterals
 using StrFormat
+using BenchmarkTools
+
+const solved_days = 1:4
 
 export  Day01, Day02, Day03, Day04, Day05, Day06, Day07, Day08, Day09, 
         Day10, Day11, Day12, Day13, Day14, Day15, Day16, Day17, Day18, 
@@ -16,6 +19,16 @@ end
 
 function splitlines(input)
     split(input, "\n", keepempty=false)
+end
+
+function benchmark(days = solved_days)
+    results = []
+    for day = days
+        ds = Symbol(f"Day\%02d(day)")
+        result = @benchmark eval($ds).solve()
+        push!(results, (Time = time(result), Memory = memory(result)))
+    end
+    return results
 end
 
 for i in 1:26
