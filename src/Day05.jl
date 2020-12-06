@@ -1,7 +1,11 @@
 module Day05
 using AdventOfCode2020
 
-const raw_data = readinput(joinpath(@__DIR__, "Day04_input.txt"))
+const raw_data = readinput(joinpath(@__DIR__, "Day05_input.txt"))
+
+function get_id(seatnumber::String)
+    1 + 1
+end
 
 function solve(input = raw_data)
     data = split(input, "\n", keepempty=false)

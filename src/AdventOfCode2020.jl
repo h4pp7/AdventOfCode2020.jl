@@ -9,7 +9,7 @@ const solved_days = 1:4
 export  Day01, Day02, Day03, Day04, Day05, Day06, Day07, Day08, Day09, 
         Day10, Day11, Day12, Day13, Day14, Day15, Day16, Day17, Day18, 
         Day19, Day20, Day21, Day22, Day23, Day24, Day25, Day26, 
-        readinput, splitlines
+        readinput, splitlines, Test
 
 function readinput(path)
     open(path, "r") do f
@@ -20,6 +20,12 @@ end
 function splitlines(input)
     split(input, "\n", keepempty=false)
 end
+
+for i in 1:26
+    include(joinpath(@__DIR__, f"Day\%02d(i).jl"))
+end
+
+include(joinpath(@__DIR__, "../test", "tests.jl"))
 
 function benchmark(days = solved_days)
     results = []
@@ -34,9 +40,6 @@ function benchmark(days = solved_days)
     return results
 end
 
-for i in 1:26
-    include(joinpath(@__DIR__, f"Day\%02d(i).jl"))
-end
 
 function setup_project()
     for i = 1:26
