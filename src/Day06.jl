@@ -1,7 +1,7 @@
 module Day06
 using AdventOfCode2020
 using StatsBase
-# TODO rewrite with loops. How can I get the memory allocs down?
+# TODO rewrite with loops. How can I get the memory ?
 
 const raw_data = readinput(joinpath(@__DIR__, "Day06_input.txt"))
 
@@ -12,15 +12,24 @@ end
 
 function part1(groups = split(raw_data, "\n\n"))
     mapreduce(+, groups) do l
-        answers = replace(l, "\n" => "")
-        collect(answers) |> Set |> length
+        replace(l, "\n" => "") |> Set |> length
     end
 end
 
 function part2(groups = split(raw_data, "\n\n", keepempty = false))
     mapreduce(+, groups) do g
         counts = countmap((c for c in g))   
-        sum([1 for (k,v) in counts if v == length(split(g, "\n"))])
+        if haskey(counts, '\n')
+            s = 0
+            for (k,v) in counts
+                if v > counts['\n']
+                    s += 1
+                end
+            end
+        else
+            s = counts.count
+        end
+    s
     end
 end
 end # module
