@@ -4,15 +4,20 @@ using Test
 
 function runtests()
     @testset "Day 5" begin
-        testdata = "FBFBBFFRLR\n" *
+        testdata1 = "FBFBBFFRLR\n" *
                    "BFFFBBFRRR\n" *
                    "FFFBBBFRRR\n" *
                    "BBFFBBFRLL\n"
-       @test AdventOfCode2020.Day05.get_id("FBFBBFFRLR") == 357
-       @test AdventOfCode2020.Day05.get_id("BFFFBBFRRR") == 567
-       @test AdventOfCode2020.Day05.get_id("FFFBBBFRRR") == 119
-       @test AdventOfCode2020.Day05.get_id("BBFFBBFRLL") == 820
-       @test AdventOfCode2020.Day05.part1(testdata) == 820
+
+        testdata2 = "FFFFFFFLLR\n" *
+                    "FFFFFFFLRL\n" *
+                    "FFFFFFFLRR\n" *
+                    "FFFFFFFRLL\n" *
+                    "FFFFFFFRRL\n" *
+                    "FFFFFFFRRR\n" *
+
+        @test AdventOfCode2020.Day05.part1(testdata1) == 820
+        @test AdventOfCode2020.Day05.part2(testdata2) == 5
     end
 end
 end # module
