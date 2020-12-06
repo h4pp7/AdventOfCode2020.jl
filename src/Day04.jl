@@ -1,9 +1,6 @@
 module Day04
 using AdventOfCode2020
 
-const passports = readinput(joinpath(@__DIR__, "Day04_input.txt")) |>
-                  x -> split(x, "\n\n")
-
 const requiered_fields = [r"(^|\s)byr:\S", r"(^|\s)eyr:\S", r"(^|\s)iyr:\S",
                           r"(^|\s)ecl:\S", r"(^|\s)hcl:\S", r"(^|\s)hgt:\S",
                           r"(^|\s)pid:\S"]
@@ -15,7 +12,11 @@ const valid_fields = [r"byr:(19[2-9][0-9]|200[0-2])(\s|$)",
                       r"ecl:(amb|blu|brn|gry|grn|hzl|oth)(\s|$)",
                       r"pid:[0-9]{9}(\s|$)"]
 
-function solve(passports = passports, required_fields = requiered_fields)
+const raw_data = readinput(joinpath(@__DIR__, "Day04_input.txt"))
+
+function solve(input = raw_data, required_fields = requiered_fields,
+               valid_fields = valid_fields)
+    passports = split(input, "\n\n")
     solution1 = 0
     solution2 = 0
     for p in passports  

@@ -24,9 +24,12 @@ end
 function benchmark(days = solved_days)
     results = []
     for day = days
-        ds = Symbol(f"Day\%02d(day)")
-        result = @benchmark eval($ds).solve()
-        push!(results, (Time = time(result), Memory = memory(result)))
+        global input = readinput(joinpath(@__DIR__, f"Day\%02d(day)_input.txt"))
+        global ds = Symbol(f"Day\%02d(day)")
+        result = @benchmark eval($ds).solve($input)
+        ptime = BenchmarkTools.prettytime(time(result))
+        pmemory = BenchmarkTools.prettymemory(memory(result))
+        push!(results, (Time = ptime, Memory = pmemory))
     end
     return results
 end

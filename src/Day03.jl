@@ -14,17 +14,16 @@ function parsemap(data)
     return mapreduce(parserow, hcat, data) 
 end
 
-const input =   readinput(joinpath(@__DIR__, "Day03_input.txt")) |> 
-                splitlines |> parsemap
+const raw_data = readinput(joinpath(@__DIR__, "Day03_input.txt"))
 const start_pos = CartesianIndex(1, 1)
 const part1_slope = CartesianIndex(3, 1)
 const part2_slopes = [CartesianIndex(1, 1), CartesianIndex(3, 1),
                       CartesianIndex(5, 1), CartesianIndex(7, 1),
                       CartesianIndex(1, 2)]
 
-function solve(terrain = input, start = start_pos, slope = part1_slope, 
-               slopes = part2_slopes)
-
+function solve(input = raw_data, start = start_pos, slope = part1_slope, slopes
+               = part2_slopes)
+    terrain = splitlines(input) |> parsemap
     solution1 = count_trees(terrain, start, slope)
     solution2 = mapreduce(s -> count_trees(terrain, start, s), *, slopes)
 

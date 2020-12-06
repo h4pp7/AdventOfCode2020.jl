@@ -1,18 +1,19 @@
 module Day01
 using AdventOfCode2020
 
-function solve(input::AbstractString = readinput(
-    joinpath(@__DIR__, "Day01_input.txt")))
+const raw_data = readinput(joinpath(@__DIR__, "Day01_input.txt"))
+
+function solve(input = raw_data)
     data = split(input, "\n", keepempty=false)
     (Part1=part1(data), Part2=part2(data))
 end
 
-function part1(data::AbstractArray)
+function part1(data)
     nums = [parse(Int, n) for n in data]
     reduce(*, (x for x in nums, y in nums if x+y == 2020))
 end
 
-function part2(data::AbstractArray)
+function part2(data)
     nums = [parse(Int, n) for n in data]
     reduce(*, 
         [[x, y, z] for x in nums, 

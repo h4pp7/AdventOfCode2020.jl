@@ -1,10 +1,6 @@
 module Day02
 using AdventOfCode2020
 
-# TODO parse rules and passwords with regex
-const input = readinput(joinpath(@__DIR__, "Day02_input.txt")) |>
-              splitlines
-
 function parse_pw(line)
     rule, pw = split(line, ": ")
     char = last(rule)
@@ -12,13 +8,12 @@ function parse_pw(line)
     return [pw, char, min, max]
 end
 
-# Doesn't make a difference to declare it as const here, the compiler figures
-# it out
-const rule_pw_sets = map(input) do l
+const raw_data = readinput(joinpath(@__DIR__, "Day02_input.txt"))
+
+function solve(input = raw_data)
+    rule_pw_sets = map(splitlines(input)) do l
     parse_pw(l)
 end
-
-function solve(data = rule_pw_sets)
     return (Part1=part1(rule_pw_sets), Part2=part2(rule_pw_sets))
 end
 
