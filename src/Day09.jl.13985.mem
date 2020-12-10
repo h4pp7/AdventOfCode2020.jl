@@ -1,0 +1,42 @@
+        - module Day09
+        - using AdventOfCode2020
+        - using Combinatorics
+        - 
+        - const raw_data = readinput(joinpath(@__DIR__, "Day09_input.txt"))
+        - 
+        - function solve(data = raw_data)
+       80     N = [parse(Int, n.match) for n in eachmatch(r"\d+", data)]
+        0     solution1, hit_ind = part1(N, 25)
+        0     solution2 = part2(N, hit_ind)
+        0     (Part1=solution1, Part2=solution2)
+        - end
+        - 
+        - function part1(N, w)
+        0     @views for i in 1:length(N) - w
+        0         s = any(sum(c) == N[i+w] for c in combinations(N[i:i+w-1], 2))
+        0         if s == false
+        0             return N[i+w], i+w
+        -         end
+        -     end
+        - end
+        - 
+        - function part2(N, hit_ind)
+        -     i = 1 
+        -     j = 1
+        - 
+        0     @views while sum(N[hit_ind-j:hit_ind-i]) != N[hit_ind]
+        0         s = sum(N[hit_ind-j:hit_ind-i])
+        0         if s == N[hit_ind]
+        -             break
+        0         elseif s > N[hit_ind]
+        0             i += 1
+        -         else
+        0         j += 1
+        -         end
+        -     end
+        0     max = maximum(@view N[hit_ind-j:hit_ind-i])
+        0     min = minimum(@view N[hit_ind-j:hit_ind-i])
+        0     return max + min
+        - end
+        - 
+        - end # module
