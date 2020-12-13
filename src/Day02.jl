@@ -1,6 +1,8 @@
 module Day02
 using AdventOfCode2020
 
+const raw_data = readinput(joinpath(@__DIR__, "Day02_input.txt"))
+
 function parse_pw(line)
     rule, pw = split(line, ": ")
     char = last(rule)
@@ -8,24 +10,9 @@ function parse_pw(line)
     return [pw, char, min, max]
 end
 
-const raw_data = readinput(joinpath(@__DIR__, "Day02_input.txt"))
-
 function solve(input = raw_data)
     rule_pw_sets = map(splitlines(input)) do l
     parse_pw(l)
-end
-    return (Part1=part1(rule_pw_sets), Part2=part2(rule_pw_sets))
-end
-
-function solveboth(data = rule_pw_sets)
-    # filter to times with a closure needs exactly half as many allocs as this
-    # for loop
-    valids1 = []
-    valids2 = []
-    for l in data
-        pw, char, min, max = l
-        push!(valids1, min <= count(isequal(char), pw) <= max)
-        push!(valids2, xor(isequal(char, pw[min]), isequal(char, pw[max])))
     end
     return (Part1=part1(rule_pw_sets), Part2=part2(rule_pw_sets))
 end

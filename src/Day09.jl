@@ -8,7 +8,7 @@ function solve(data = raw_data)
     N = parse.(Int, split(data))
     solution1, hit_ind = part1(N, 25)
     solution2 = part2(N, hit_ind)
-    (Part1=solution1, Part2=solution2)
+    return (Part1=solution1, Part2=solution2)
 end
 
 function part1(N, w)

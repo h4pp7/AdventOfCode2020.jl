@@ -8,7 +8,7 @@ function part1(N)
     ones = count(x -> N[x+1] - N[x] == 1, (1:length(N)-1))
     threes = count(x -> N[x+1] - N[x] == 3, (1:length(N)-1)) + 1
     first(N) == 1 ? ones += 1 : threes += 1 # assuming there is no 2
-    ones * threes
+    return ones * threes
 end
 
 function count_ones_seqs(D)
@@ -27,20 +27,20 @@ function count_ones_seqs(D)
         end
     end
     push_or_store(c)
-    one_seqs
+    return one_seqs
 end
 
 function part2(N)
     D = vcat([0], N, [maximum(N) + 3]) |> sort |> diff
     one_seqs = count_ones_seqs(D)
     # The other alternative is to use run length encoding to get the sequences
-    2 ^ one_seqs[2] * 4 ^ one_seqs[3] * 7 ^ one_seqs[4]
+    return 2 ^ one_seqs[2] * 4 ^ one_seqs[3] * 7 ^ one_seqs[4]
 end
 
 function solve(data = raw_data)
     N = parse.(Int, split(data))
     solution1 = part1(N)
     solution2 = part2(N)
-    (Part1=solution1, Part2=solution2)
+    return (Part1=solution1, Part2=solution2)
 end
 end # module

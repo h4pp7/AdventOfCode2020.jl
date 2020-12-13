@@ -15,14 +15,14 @@ function parse_str(string = input)
     for m in eachmatch(r"([A-Z]+)(\d+)", string)
         push!(dirs, (m.captures[1], parse(Int, m.captures[2])))
     end
-    dirs
+    return dirs
 end
 
 function solve(data = input)
     dirs = parse_str(data)
     solution1 = part1(dirs)
     solution2 = part2(dirs)
-    (Part1=solution1, Part2=solution2)
+    return (Part1=solution1, Part2=solution2)
 end
 
 function part1(dirs)
@@ -38,7 +38,7 @@ function part1(dirs)
             pos += dir * n
         end
     end
-    abs(real(pos)) + abs(imag(pos))
+    return abs(real(pos)) + abs(imag(pos))
 end
 
 function part2(dirs)
@@ -54,7 +54,7 @@ function part2(dirs)
             ship += waypoint * n
         end
     end
-    abs(real(ship)) + abs(imag(ship))
+    return abs(real(ship)) + abs(imag(ship))
 end
 
 end # module

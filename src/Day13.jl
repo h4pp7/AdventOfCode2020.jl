@@ -8,12 +8,12 @@ function parse_data(data = raw_data)
     dep = parse(Int, dep)
     lines = replace(lines, "x" => "0") |> x -> split(x, ",") |> 
             x -> parse.(Int, x)
-    dep, lines
+    return dep, lines
 end
 
 function solve(data = raw_data)
     dep, lines = parse_data(data)
-    (Part1=part1(dep, lines), Part2=part2(lines))
+    return (Part1=part1(dep, lines), Part2=part2(lines))
 end
 
 function part1(dep, lines)
@@ -32,7 +32,7 @@ function part1(dep, lines)
             end
         end
     end
-    (t - dep) * id  
+    return (t - dep) * id  
 end
 
 function part2(lines)
@@ -47,6 +47,6 @@ function part2(lines)
         end
         step *= lines[i]
     end
-    t
+    return t
 end
 end # module

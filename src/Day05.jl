@@ -8,15 +8,15 @@ const raw_data = readinput(joinpath(@__DIR__, "Day05_input.txt"))
         idvector = in.(collect(line), "BR")
         # dot product to multiply each number in the vevor with 0, 2, 4, 8 etc
         # to get the decimal number
-        dot(idvector, 2 .^(9:-1:0))
+        return dot(idvector, 2 .^(9:-1:0))
 end
 
 function solve(input = raw_data)
-    (Part1=part1(input), Part2=part2(input))
+    return (Part1=part1(input), Part2=part2(input))
 end
 
 function part1(data = raw_data)
-    maximum((converttodec(line) for line in splitlines(data)))
+    return maximum((converttodec(line) for line in splitlines(data)))
 end
 
 function part2(data = raw_data)
@@ -32,6 +32,6 @@ function part2(data = raw_data)
     for i = minid:maxid
         xorid ⊻= i
     end
-    xorid
+    return xorid
 end
 end # module

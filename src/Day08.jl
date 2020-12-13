@@ -1,22 +1,25 @@
 module Day08
 using AdventOfCode2020
 
+# TODO rewrite with a struct for the system state, instead (or in addition to)
+# passing the registers around
+
 const raw_data = readinput(joinpath(@__DIR__, "Day08_input.txt"))
 
 function acc(A, PC, operand)
     A += operand
     PC += 1
-    A, PC
+    return A, PC
 end
 
 function jmp(A, PC, operand)
     PC += operand  
-    A, PC
+    return A, PC
 end
 
 function nop(A, PC, operand)
     PC += 1
-    A, PC
+    return A, PC
 end
 
 const opcodes = Dict{String, Function}("acc" => acc, "jmp" => jmp, "nop" => nop)
@@ -28,7 +31,7 @@ function run(A, PC, C, lines)
         operand = parse(Int, l[5:end])
         A, PC = opcodes[l[1:3]](A, PC, operand)
     end
-    A, PC
+    return A, PC
 end
 
 function solve(data = raw_data)
@@ -38,7 +41,7 @@ function solve(data = raw_data)
     lines = splitlines(raw_data)
     solution1, _ = run(A, PC, C, lines)
     solution2 = find_bug(lines)
-    (Part1=solution1, Part2=solution2)
+    return (Part1=solution1, Part2=solution2)
 end
 
 function find_bug(lines = splitlines(raw_data))
@@ -69,5 +72,6 @@ function find_bug(lines = splitlines(raw_data))
             lines[i] = replace(lines[i], "nop" => "jmp")
         end
     end
+    return nothing
 end
 end # module

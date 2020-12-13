@@ -2,8 +2,7 @@ module Day03
 using AdventOfCode2020
 using OffsetArrays
 
-# TODO rewrite using OffsetArrays. Can I do something fun with OffsetArray
-# indexed with CartesianIndex?
+# TODO change this back to the version without OffsetArrays. I learned more with that doing the wrapping myself.
 
 function parsemap(data)
     # Note to self: this yields an array with its colums as the rows of input,
@@ -29,7 +28,7 @@ function solve(input = raw_data, start = start_pos, slope = part1_slope,
     solution1 = count_trees(terrain, start, slope)
     solution2 = @views mapreduce(s -> count_trees(terrain, start, s), *, slopes)
 
-    (Part1=solution1, Part2=solution2)
+    return (Part1=solution1, Part2=solution2)
 end
 
 function count_trees(terrain, start, slope)
@@ -43,17 +42,6 @@ function count_trees(terrain, start, slope)
         x = mod(x + slope[1], wrap)
         y += slope[2]
     end
-    trees
-
-    #= this takes double the time and memory than the loop, sadly
-    x, y = start
-    trees = accumulate(1:num_steps; init = 0) do t, _
-        t += terrain[x, y]
-        x = mod(x + slope[1], wrap)
-        y += slope[2]
-        t
-    end
-    last(trees)
-    =#
+    return trees
 end
 end # module

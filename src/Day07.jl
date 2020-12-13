@@ -13,7 +13,7 @@ function make_node_dict(lines)
         node = match(container_p, l).match
         nodes[node] = i
     end
-    nodes
+    return nodes
 end
 
 function make_bag_matrix(lines, node_dict)
@@ -26,7 +26,7 @@ function make_bag_matrix(lines, node_dict)
             B[i, node_dict[color]] = num
         end
     end
-    B
+    return B
 end
 
 function count_containers(B, d, bag)
@@ -51,7 +51,7 @@ function count_bags(B, row)
     for j in B[row,:].nzind
         s += B[row, j] * count_bags(B, j)   
     end
-    s
+    return s
 end
 
 function solve(data = raw_data)
@@ -62,6 +62,6 @@ function solve(data = raw_data)
     solution1 = count_containers(B, node_dict, bag)
     row = node_dict[bag]
     solution2 = count_bags(B, row)
-    (Part1=solution1, Part2=solution2)
+    return (Part1=solution1, Part2=solution2)
 end
 end # module

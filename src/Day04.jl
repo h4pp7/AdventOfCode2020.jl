@@ -27,6 +27,6 @@ function solve(input = raw_data, required_fields = requiered_fields,
             end
         end
     end
-    (Part1=solution1, Part2=solution2)
+    return (Part1=solution1, Part2=solution2)
 end
 end # module
