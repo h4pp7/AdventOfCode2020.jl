@@ -1,18 +1,18 @@
 module Day19
 using AdventOfCode2020
 
-function solve(input::AbstractString = readinput(
-    joinpath(@__DIR__, "Day19_input.txt")))
-    data = split(input, "
-", keepempty=false)
+const input = readinput(joinpath(@__DIR__, "Day19_input.txt")) |> 
+             splitlines
+
+function solve(data = input)
     (Part1=part1(data), Part2=part2(data))
 end
 
-function part1(data::AbstractArray)
+function part1(data)
     missing
 end
 
-function part2(data::AbstractArray)
+function part2(data)
     missing
 end
 end # module
