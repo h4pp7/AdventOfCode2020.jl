@@ -4,9 +4,9 @@ using AdventOfCode2020
 const raw_data = readinput(joinpath(@__DIR__, "Day13_input.txt"))
 
 function parse_data(data = raw_data)
-    dep, lines = split(data) 
-    dep = parse(Int, dep)
-    lines = replace(lines, "x" => "0") |> x -> split(x, ",") |> 
+    dep_str, lines_str = split(data) 
+    dep = parse(Int, dep_str)
+    lines = replace(lines_str, "x" => "0") |> x -> split(x, ",") |> 
             x -> parse.(Int, x)
     return dep, lines
 end

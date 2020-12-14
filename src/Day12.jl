@@ -11,11 +11,8 @@ const D = Dict("N" => 0+1im,
                "L" => 0+1im)
 
 function parse_str(string = input)
-    dirs = [] 
-    for m in eachmatch(r"([A-Z]+)(\d+)", string)
-        push!(dirs, (m.captures[1], parse(Int, m.captures[2])))
-    end
-    return dirs
+    return [(m.captures[1], m.captures[2]) 
+            for m in eachmatch(r"([A-Z]+)(\d+)", string)]
 end
 
 function solve(data = input)

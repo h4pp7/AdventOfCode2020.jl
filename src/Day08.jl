@@ -29,7 +29,7 @@ function run(A, PC, C, lines)
         push!(C, PC) 
         l = lines[PC]
         operand = parse(Int, l[5:end])
-        A, PC = opcodes[l[1:3]](A, PC, operand)
+        A, PC = opcodes[l[1:3]](A, PC, operand)::Tuple{Int,Int}
     end
     return A, PC
 end
@@ -37,7 +37,7 @@ end
 function solve(data = raw_data)
     A = 0
     PC = 1
-    C = []
+    C = Array{Int,1}()
     lines = splitlines(raw_data)
     solution1, _ = run(A, PC, C, lines)
     solution2 = find_bug(lines)
@@ -47,7 +47,7 @@ end
 function find_bug(lines = splitlines(raw_data))
     A = 0
     PC = 1
-    C = []
+    C = Array{Int,1}()
     lines = splitlines(raw_data)
     run(A, PC, C, lines)
 
@@ -56,13 +56,13 @@ function find_bug(lines = splitlines(raw_data))
     for i in nj
         A = 0
         PC = 1
-        C = []
+        nC = similar(C)
         if lines[i][1:3] == "jmp" 
             lines[i] = replace(lines[i], "jmp" => "nop")
         else 
             lines[i] = replace(lines[i], "nop" => "jmp")
         end
-        A, PC = run(A, PC, C, lines)
+        A, PC = run(A, PC, nC, lines)
         if PC == length(lines) + 1
             return A
         end
