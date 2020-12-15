@@ -1,14 +1,14 @@
 module Day05
 using AdventOfCode2020
-using LinearAlgebra
 
 const raw_data = readinput(joinpath(@__DIR__, "Day05_input.txt"))
 
 @inline function converttodec(line)
         idvector = in.(collect(line), "BR")
-        # dot product to multiply each number in the vevor with 0, 2, 4, 8 etc
+        # "dot product" (lazy adjoint) to multiply each number in the vevor with 1, 2, 4, 8 etc
         # to get the decimal number
-        return dot(idvector, 2 .^(9:-1:0))
+        c = 2 .^(9:-1:0)
+        return idvector'c
 end
 
 function solve(input = raw_data)
