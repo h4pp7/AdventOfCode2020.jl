@@ -5,7 +5,7 @@ const raw_data = readinput(joinpath(@__DIR__, "Day17_input.txt"))
 
 function create_dim(input, samplesize)
     blueprints = reduce(vcat, permutedims.(collect.(split(input))))
-    M = BitArray(zeros(samplesize))
+    M = BitArray{length(samplesize)}(undef, samplesize)
     R = CartesianIndices(blueprints)
     for I in R
         blueprints[I] == '#' ? M[I] = 1 : M[I] = 0
@@ -14,7 +14,8 @@ function create_dim(input, samplesize)
 end
 
 function step(M)
-    A =  BitArray(zeros(size(M) .+ 2))
+    # TODO only grow when active cells touch the walls
+    A = BitArray(zeros(Int, size(M) .+ 2))
     out = copy(A)
     R = CartesianIndices(M)
     offset = CartesianIndex(first(R))
