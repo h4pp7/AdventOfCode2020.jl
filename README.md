@@ -19,3 +19,10 @@ dim every step by 2. Would be nice if I could figure out a away to check the
 found a way to do that and retain combatibility with arbitrary dimensions,
 though. Maybe I can use [this idea](https://julialang.org/blog/2016/02/iteration/) for summing along a single
 dimension...
+
+## Day 18
+Implemented half a [Shunting-yard
+algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm). It converts
+a string in infix notation to a string in reverse polish notation, but it can
+only deal with '*' and '+'. I then evaluate that string by splitting it up and
+mapping over it with Meta.parse and eval.
