@@ -28,6 +28,13 @@ only deal with '*' and '+'. I then evaluate that string by splitting it up and
 mapping over it with Meta.parse and eval.
 
 ## Day 19
+**unfinished**
+TODO: complete implementing [CYK algorithm](https://en.wikipedia.org/wiki/CYK_algorithm). Eliminating unit rules is missing.
+
 Solved part 2 by building a regex pattern. Just iterated over the rules and
 replaced numbers by the rule text of the referenced rule until no numbers where
 left.
+
+## Day 20
+Solved part 1 bei not building the map and just storing the border tiles. Just brute force search for the corner tiles.
+For part 2 find the monsers with a convolve function.
