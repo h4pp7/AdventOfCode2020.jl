@@ -26,3 +26,8 @@ algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm). It converts
 a string in infix notation to a string in reverse polish notation, but it can
 only deal with '*' and '+'. I then evaluate that string by splitting it up and
 mapping over it with Meta.parse and eval.
+
+## Day 19
+Solved part 2 by building a regex pattern. Just iterated over the rules and
+replaced numbers by the rule text of the referenced rule until no numbers where
+left.
