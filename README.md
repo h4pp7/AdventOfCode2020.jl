@@ -38,3 +38,10 @@ left.
 ## Day 20
 Solved part 1 bei not building the map and just storing the border tiles. Just brute force search for the corner tiles.
 For part 2 find the monsers with a convolve function.
+
+## Day 21
+Make a dictionary from allergens to ingredients, with only the intersection of
+all the ingredients listet for that allergen. Count all the ingredients not in
+that dictionary for part 1. For part 2 I just reused Day 16. Go through the
+dictionary, find the allergen that has only one ingredient listet, pop that
+allergen out and into a confirmed list. Repeat until the dictionary is empty.
