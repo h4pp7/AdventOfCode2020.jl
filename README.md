@@ -45,3 +45,11 @@ all the ingredients listet for that allergen. Count all the ingredients not in
 that dictionary for part 1. For part 2 I just reused Day 16. Go through the
 dictionary, find the allergen that has only one ingredient listet, pop that
 allergen out and into a confirmed list. Repeat until the dictionary is empty.
+
+## Day 22
+For part 1 just implemented the instructions step by step, basically. For part
+2 call the function recursively in the while loop, when the condition for the
+recursive game is met. Store the previous game turns to check for
+non-terminating games. I tried pretty long to do it with a recursive call at
+the end of the function instead of a while loop. But never could get the right
+solution and had some weird interactions between the decks and their copies.
