@@ -53,3 +53,15 @@ recursive game is met. Store the previous game turns to check for
 non-terminating games. I tried pretty long to do it with a recursive call at
 the end of the function instead of a while loop. But never could get the right
 solution and had some weird interactions between the decks and their copies.
+
+## Day 23
+Naively implemented part 1. Instead of wrapping around I used `circularshift`
+to rotate the contents of the vector, so that the current cup was always the
+first element.
+
+For part 2 used a vector like a linked list, where the indices represent the
+cups and the value at a given index gives the index of the next cup. Tried to
+find out for quite some time why it still ran for a minute without terminating
+(before I stopped it). For some reason I put 1_000_000_000 as the size of the
+vector and 10_000_000_000 as the number of steps. So 10^9 and 10^10 instead of
+10^6 and 10^7 🤦
